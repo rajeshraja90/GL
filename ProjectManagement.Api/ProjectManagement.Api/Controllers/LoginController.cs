@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Data.Interfaces;
+using ProjectManagement.Entities;
 
 namespace ProjectManagement.Api.Controllers
 {
@@ -21,7 +22,7 @@ namespace ProjectManagement.Api.Controllers
         {
             var result = _loginRepository.Login(userName,password);
             if (result != null)
-                return Ok();
+                return Ok(result);
             else
                 return BadRequest();
         }

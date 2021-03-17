@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ProjectManagement.Data.Interfaces
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T> where T : BaseEntity
     {
         IQueryable<T> Get();
 
@@ -16,7 +17,7 @@ namespace ProjectManagement.Data.Interfaces
 
         T Update(T entity);
 
-        void Delete(long id);
+        Task<int> Delete(long id);
 
     }
 }

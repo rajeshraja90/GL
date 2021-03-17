@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Data.Interfaces;
+using ProjectManagement.Entities;
 
 namespace ProjectManagement.Api.Controllers
 {
-    public class BaseController<T> : ControllerBase where T : class
+    public class BaseController<T> : ControllerBase where T : BaseEntity
     {
         private readonly IBaseRepository<T> _baseRepository;
         public BaseController(IBaseRepository<T> baseRepository)

@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using ProjectManagement.Data;
 using ProjectManagement.Data.Implementation;
 using ProjectManagement.Data.Interfaces;
 using ProjectManagement.Entities;
@@ -35,6 +30,8 @@ namespace ProjectManagement.Api
             services.AddTransient(typeof(IBaseRepository<User>), typeof(BaseRepository<User>));
             services.AddTransient(typeof(IBaseRepository<Tasks>), typeof(BaseRepository<Tasks>));
             services.AddTransient(typeof(ILoginRepository), typeof(LoginRepository));
+            services.AddDbContext<ProjectManagementContext>(opt => opt.UseInMemoryDatabase("ProjectManagement"));
+            services.AddScoped<ProjectManagementContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
