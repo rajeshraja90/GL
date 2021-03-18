@@ -25,15 +25,19 @@ namespace ProjectManagement.Data
             {
                 FirstName = "Sam",
                 LastName = "Samir",
-                Email = "sam@global.com"
+                Email = "sam@global.com",
             };
             Users.Add(testUser2);
 
-            Project testProject1 = new Project { Name = "TestProject1", CreatedOn = DateTime.Now, Detail = "This is Test project 1" };
-            Project testProject2 = new Project { Name = "TestProject2", CreatedOn = DateTime.Now, Detail = "This is Test project 2" };
+            var testProject1 = new Project { Name = "Project1", CreatedOn = DateTime.Now, Detail = "This is project 1" };
+            var testProject2 = new Project { Name = "Project2", CreatedOn = DateTime.Now, Detail = "This is project 2" };
 
             Project.Add(testProject1);
             Project.Add(testProject2);
+
+            var testTask = new Tasks { ProjectID = 1, AssignedToUserID = 1, CreatedOn = DateTime.Now };
+            Task.Add(testTask);
+
             this.SaveChanges();
         }
 
