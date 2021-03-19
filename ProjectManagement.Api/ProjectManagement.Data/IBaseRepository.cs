@@ -13,9 +13,9 @@ namespace ProjectManagement.Data.Interfaces
 
         T Get(long id);
 
-        T Add(T entity);
+        Task<T> Add(T entity);
 
-        T Update(T entity);
+        Task<T> Update(T entity);
 
         Task<int> Delete(long id);
 

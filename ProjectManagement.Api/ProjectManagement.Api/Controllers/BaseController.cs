@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Data.Interfaces;
 using ProjectManagement.Entities;
+using System.Threading.Tasks;
 
 namespace ProjectManagement.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class BaseController<T> : ControllerBase where T : BaseEntity
     {
         private readonly IBaseRepository<T> _baseRepository;
@@ -51,10 +53,16 @@ namespace ProjectManagement.Api.Controllers
             else
                 return BadRequest();
         }
-
+        
+        [Route("Delete/{id}")]
         [HttpDelete]
         public IActionResult Delete(long id)
         {
+            T checkExisting = _baseRepository.Get(id);
+            if (checkExisting is null)
+            {
+                return BadRequest();
+            }
             _baseRepository.Delete(id);
             return Ok();
         }

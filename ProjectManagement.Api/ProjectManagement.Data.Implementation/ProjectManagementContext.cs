@@ -35,7 +35,7 @@ namespace ProjectManagement.Data
             Project.Add(testProject1);
             Project.Add(testProject2);
 
-            var testTask = new Tasks { ProjectID = 1, AssignedToUserID = 1, CreatedOn = DateTime.Now };
+            var testTask = new Tasks { Detail="Test Task", CreatedOn = DateTime.Now,Status=Entities.Enums.TaskStatus.New };
             Task.Add(testTask);
 
             this.SaveChanges();

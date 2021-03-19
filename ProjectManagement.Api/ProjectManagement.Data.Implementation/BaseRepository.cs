@@ -17,17 +17,17 @@ namespace ProjectManagement.Data.Implementation
             this._projectManagementContext = projectManagementContext;
             _projectManagementContext.AddInitialData();
         }
-        public T Add(T entity)
+        public async Task<T> Add(T entity)
         {
-            _projectManagementContext.Set<T>().Add(entity);
-            _projectManagementContext.SaveChangesAsync();
+            _projectManagementContext.Add<T>(entity);
+            await _projectManagementContext.SaveChangesAsync();
             return entity;
         }
 
-        public Task<int> Delete(long id)
+        public async Task<int> Delete(long id)
         {
-            _projectManagementContext.Set<T>().Remove(Get(id));
-           return _projectManagementContext.SaveChangesAsync();
+            _projectManagementContext.Remove<T>(Get(id));
+           return await _projectManagementContext.SaveChangesAsync();
         }
 
         public IQueryable<T> Get()
@@ -40,10 +40,10 @@ namespace ProjectManagement.Data.Implementation
             return _projectManagementContext.Set<T>().Where(i => i.ID == id).FirstOrDefault();
         }
 
-        public T Update(T entity)
+        public async Task<T> Update(T entity)
         {
-            _projectManagementContext.Set<T>().Update(entity);
-            _projectManagementContext.SaveChangesAsync();
+            _projectManagementContext.Update<T>(entity);
+            await _projectManagementContext.SaveChangesAsync();
             return entity;
         }
     }
