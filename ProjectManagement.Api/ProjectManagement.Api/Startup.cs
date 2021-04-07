@@ -31,6 +31,7 @@ namespace ProjectManagement.Api
             services.AddTransient(typeof(IBaseRepository<Tasks>), typeof(BaseRepository<Tasks>));
             services.AddTransient(typeof(ILoginRepository), typeof(LoginRepository));
             services.AddDbContext<ProjectManagementContext>(opt => opt.UseInMemoryDatabase("ProjectManagement"));
+        //  services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +49,8 @@ namespace ProjectManagement.Api
             app.UseAuthorization();
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("v1/swagger.json", "Project Management V1");
             });
 
@@ -56,8 +58,8 @@ namespace ProjectManagement.Api
             {
                 endpoints.MapControllers();
             });
-                     
-           
+
+
         }
     }
 }

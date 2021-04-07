@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ProjectManagement.Entities
 {
@@ -13,7 +14,7 @@ namespace ProjectManagement.Entities
         public string Email { get; set; }
 
         public string Password { get; set; }
-
+        [JsonIgnore]
         public virtual IEnumerable<Tasks> Tasks { get; set; }
     }
 }
