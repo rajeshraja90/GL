@@ -77,7 +77,32 @@ namespace ProjectManagement.Api.Controllers.Test
             UserController userController = new UserController(mockObject.Object);
             var result = userController.Add(userAdd);
             Assert.NotNull(result);
-        }        
+        }
+        [Fact]
+        public void TestPut()
+        {
+            var user = new User
+            {
+                FirstName = "karim",
+                LastName = "David",
+                Email = "karim@global.com",
+                Password = "Karim"
+            };
+
+            mockObject.Setup(m => m.Update(user)).Returns(() => Task<Project>.FromResult(user));
+            UserController userController = new UserController(mockObject.Object);
+            var result = userController.Put(user);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void TestDelete()
+        {
+            mockObject.Setup(m => m.Delete(1)).Returns(() => Task<int>.FromResult(1));
+            UserController userController = new UserController(mockObject.Object);
+            var result = userController.Delete(1);
+            Assert.NotNull(result);
+        }
 
     }
 }

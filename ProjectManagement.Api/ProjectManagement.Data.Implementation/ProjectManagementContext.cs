@@ -25,7 +25,7 @@ namespace ProjectManagement.Data
             {
                 FirstName = "Sam",
                 LastName = "Samir",
-                Email = "sam@global.com",
+                Email = "sam@global.com"
             };
             Users.Add(testUser2);
 
@@ -35,8 +35,10 @@ namespace ProjectManagement.Data
             Project.Add(testProject1);
             Project.Add(testProject2);
 
-            var testTask = new Tasks { Detail="Test Task", CreatedOn = DateTime.Now,Status=Entities.Enums.TaskStatus.New };
+            var testTask = new Tasks { Detail="Test Task 1", CreatedOn = DateTime.Now,Status=Entities.Enums.TaskStatus.New };
+            var testTask2 = new Tasks { Detail = "Test Task 2", CreatedOn = DateTime.Now, Status = Entities.Enums.TaskStatus.New };
             Task.Add(testTask);
+            Task.Add(testTask2);
 
             this.SaveChanges();
         }
