@@ -1,94 +1,56 @@
-using Moq;
-using ProjectManagement.Data.Interfaces;
-using ProjectManagement.Entities;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using ProjectManagement.Entities;
 using Xunit;
 
 namespace ProjectManagement.Api.Controllers.Test
 {
-    public class UserControllerTest
+    public class UserControllerTest : IClassFixture<TestingFactory<Startup>>
     {
-        private FakeDbSet<User> Users; 
-        Mock<IBaseRepository<User>> mockObject;
 
-        public UserControllerTest()
-        {            
-            mockObject = new Mock<IBaseRepository<User>>();
-        }
-
-        [Fact]
-        public void TestGet()
+        private readonly HttpClient _client;
+        public UserControllerTest(TestingFactory<Startup> factory)
         {
-            Users = new FakeDbSet<User>();
-            var testUser1 = new User
-            {
-                FirstName = "Rajesh",
-                LastName = "Kumar",
-                Email = "rajesh@global.com",
-                Password = "rajesh",
-                ID = 1
-            };
-            Users.Add(testUser1);
-            var testUser2 = new User
-            {
-                FirstName = "Sam",
-
-                LastName = "Samir",
-                Email = "sam@global.com",
-                ID = 2
-            };
-            Users.Add(testUser2);
-
-            mockObject.Setup(m => m.Get()).Returns(Users);            
-            UserController userController = new UserController(mockObject.Object);
-            var result = userController.Get();
-            Assert.NotNull(result);
+            _client = factory.CreateClient();
         }
         [Fact]
-        public void TestGetById()
-        {            
-            var testUser1 = new User
-            {
-                FirstName = "Rajesh",
-                LastName = "Kumar",
-                Email = "rajesh@global.com",
-                Password = "rajesh",
-                ID = 1
-            };           
-
-            mockObject.Setup(m => m.Get(1)).Returns(testUser1);
-            UserController userController = new UserController(mockObject.Object);
-            var result = userController.Get(1);
-            Assert.NotNull(result);
-            var resultFail = userController.Get(2);
-            Assert.IsType<Microsoft.AspNetCore.Mvc.BadRequestResult>(resultFail);
-        }
-        [Fact]
-        public void TestPost()
+        public async Task TestUserGet()
         {
-            var userAdd = new User
-            {
-                FirstName = "RajeshAdd",
-                LastName = "Kumar",
-                Email = "rajesh@global.com",
-                Password = "rajesh"
-            };            
-            mockObject.Setup(m => m.Add(userAdd)).Returns(() => Task<User>.FromResult(userAdd));
-            UserController userController = new UserController(mockObject.Object);
-            var result = userController.Add(userAdd);
-            Assert.NotNull(result);            
+            var response = await _client.GetAsync("/api/User");
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+            Assert.Contains("rajesh", responseString);
+            Assert.Contains("sam", responseString);
         }
         [Fact]
-        public void TestDelete()
-        {            
+        public async Task TestUserPost()
+        {
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/api/User/");
 
-            mockObject.Setup(m => m.Delete(10)).Returns(() => Task<int>.FromResult(1));
-            UserController userController2 = new UserController(mockObject.Object);
-            var result2 = userController2.Delete(10);
+            User postquote = new User()
+            {               
+                FirstName = "david" ,
+               LastName = "kahn" ,
+                Email = "david@global.com",
+                Password = "kahn"               
+            };
+            string jsonUser = JsonConvert.SerializeObject(postquote);    
 
-            Assert.NotNull(result2);
+            postRequest.Content = new StringContent(jsonUser, Encoding.UTF8, "application/json");  
+            
+            var response = await _client.SendAsync(postRequest);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseString = await response.Content.ReadAsStringAsync();            
+
+            Assert.Contains("david", responseString);
         }
-
     }
 
 }

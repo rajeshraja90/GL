@@ -31,7 +31,7 @@ namespace ProjectManagement.Api
             services.AddTransient(typeof(IBaseRepository<Tasks>), typeof(BaseRepository<Tasks>));
             services.AddTransient(typeof(ILoginRepository), typeof(LoginRepository));
             services.AddDbContext<ProjectManagementContext>(opt => opt.UseInMemoryDatabase("ProjectManagement"));
-        //  services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

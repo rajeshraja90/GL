@@ -417,3 +417,6 @@ D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\Micr
 D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
 D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Code\ProjectManagement.Api\ProjectManagementTest\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

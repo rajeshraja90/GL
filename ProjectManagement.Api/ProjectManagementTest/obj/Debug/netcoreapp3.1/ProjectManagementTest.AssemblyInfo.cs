@@ -12,6 +12,12 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProjectManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Code\\ProjectManagement.Api\\ProjectManagement.Api", "ProjectManagement.Api.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProjectManagement.Data.Implementation, Version=1.0.0.0, Culture=neutral, PublicKe" +
+    "yToken=null", "D:\\Code\\ProjectManagement.Api\\ProjectManagement.Data.Implementation", "ProjectManagement.Data.Implementation.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProjectManagement.Data.Interfaces, Version=1.0.0.0, Culture=neutral, PublicKeyTok" +
+    "en=null", "D:\\Code\\ProjectManagement.Api\\ProjectManagement.Data", "ProjectManagement.Data.Interfaces.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProjectManagement.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" +
+    "", "D:\\Code\\ProjectManagement.Api\\ProjectManagement.Entities", "ProjectManagement.Entities.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjectManagementTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
