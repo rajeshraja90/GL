@@ -15,7 +15,7 @@ namespace ProjectManagement.Data.Implementation
         public BaseRepository(ProjectManagementContext projectManagementContext)
         {
             this._projectManagementContext = projectManagementContext;
-            _projectManagementContext.AddInitialData();
+           // _projectManagementContext.AddInitialData();
         }
         public async Task<T> Add(T entity)
         {
