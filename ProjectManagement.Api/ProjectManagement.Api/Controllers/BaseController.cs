@@ -64,7 +64,7 @@ namespace ProjectManagement.Api.Controllers
                 return BadRequest();
             }
             _baseRepository.Delete(id);
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
     }
