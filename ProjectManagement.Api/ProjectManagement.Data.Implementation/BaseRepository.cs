@@ -4,35 +4,47 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ProjectManagement.Data.Implementation
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
+        private readonly ProjectManagementContext _projectManagementContext;
 
-        public T Add(T entity)
+        public BaseRepository(ProjectManagementContext projectManagementContext)
         {
-            throw new NotImplementedException();
+            this._projectManagementContext = projectManagementContext;
+           // _projectManagementContext.AddInitialData();
+        }
+        public async Task<T> Add(T entity)
+        {
+            _projectManagementContext.Add<T>(entity);
+            await _projectManagementContext.SaveChangesAsync();
+            return entity;
         }
 
-        public void Delete(long id)
+        public async Task<int> Delete(long id)
         {
-            throw new NotImplementedException();
+            _projectManagementContext.Remove<T>(Get(id));
+           return await _projectManagementContext.SaveChangesAsync();
         }
 
         public IQueryable<T> Get()
         {
-            throw new NotImplementedException();
+            return _projectManagementContext.Set<T>();
         }
 
         public T Get(long id)
         {
-            throw new NotImplementedException();
+            return _projectManagementContext.Set<T>().Where(i => i.ID == id).FirstOrDefault();
         }
 
-        public T Update(T entity)
+        public async Task<T> Update(T entity)
         {
-            throw new NotImplementedException();
+            _projectManagementContext.Update<T>(entity);
+            await _projectManagementContext.SaveChangesAsync();
+            return entity;
         }
     }
 }
